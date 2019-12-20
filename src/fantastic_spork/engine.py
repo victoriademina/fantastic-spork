@@ -29,3 +29,14 @@ def move_unit(landscape, coordinates, direction):
     if 0 <= new_x < len(landscape) and 0 <= new_y < len(landscape[0]) and landscape[new_x][new_y] == 1:
         return new_x, new_y
     return None
+
+
+def find_unit(units, coordinates):
+    count = 0
+    for i in units:
+
+        if i[0] == coordinates[0] and i[1] == coordinates[1]:
+            return count
+        else:
+            count += 1
+    return None
