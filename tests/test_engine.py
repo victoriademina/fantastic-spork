@@ -13,3 +13,15 @@ from fantastic_spork import engine
 def test_fight(health_x, exp_x, health_y, exp_y, expected_health_x, expected_exp_x, expected_health_y, expected_exp_y):
     assert engine.fight(health_x, exp_x, health_y, exp_y) == (
         expected_health_x, expected_exp_x, expected_health_y, expected_exp_y)
+
+
+@pytest.mark.parametrize(
+    "landscape,coordinates,direction,expected",
+    [
+        ([[1, 1], [1, 1]], (0, 0), "N", (0, 1)),
+        ([[1, 0], [1, 1]], (0, 0), "N", None),
+        ([[1, 1], [1, 1]], (1, 0), "S", None),
+    ],
+)
+def test_move_unit(landscape, coordinates, direction, expected):
+    assert engine.move_unit(landscape, coordinates, direction) == expected

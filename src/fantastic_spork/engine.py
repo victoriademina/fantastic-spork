@@ -14,3 +14,18 @@ def fight(health_x, exp_x, health_y, exp_y):
         new_exp_y = 100
 
     return new_health_x, new_exp_x, new_health_y, new_exp_y
+
+
+def move_unit(landscape, coordinates, direction):
+    new_x, new_y = coordinates
+    if direction == "N":
+        new_y += 1
+    elif direction == "S":
+        new_y -= 1
+    elif direction == "E":
+        new_x += 1
+    else:
+        new_x -= 1
+    if 0 <= new_x < len(landscape) and 0 <= new_y < len(landscape[0]) and landscape[new_x][new_y] == 1:
+        return new_x, new_y
+    return None
