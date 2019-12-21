@@ -16,7 +16,7 @@ def fight(health_x, exp_x, health_y, exp_y):
     return new_health_x, new_exp_x, new_health_y, new_exp_y
 
 
-def move_unit(landscape, coordinates, direction):
+def calc_new_coordinates(landscape, coordinates, direction):
     new_x, new_y = coordinates
     if direction == "N":
         new_y += 1

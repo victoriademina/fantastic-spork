@@ -23,8 +23,8 @@ def test_fight(health_x, exp_x, health_y, exp_y, expected_health_x, expected_exp
         ([[1, 1], [1, 1]], (1, 0), "S", None),
     ],
 )
-def test_move_unit(landscape, coordinates, direction, expected):
-    assert engine.move_unit(landscape, coordinates, direction) == expected
+def test_calc_new_coordinates(landscape, coordinates, direction, expected):
+    assert engine.calc_new_coordinates(landscape, coordinates, direction) == expected
 
 
 @pytest.mark.parametrize(
