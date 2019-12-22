@@ -40,3 +40,36 @@ def find_unit(units, coordinates):
         else:
             count += 1
     return None
+
+
+def move_unit(landscape, units, coordinates, direction):
+    id = find_unit(units, coordinates)
+    unit = units[id]
+    new_coordinates = calc_new_coordinates(landscape, coordinates, direction)
+    if new_coordinates is None:
+        return None
+    opponent_id = find_unit(units, new_coordinates)
+    if opponent_id is None:
+        new_unit = new_coordinates[0], new_coordinates[1], unit[2], unit[3]
+        units[id] = new_unit
+        return "Moved"
+    opponent = units[opponent_id]
+    fight_result = fight(unit[2], unit[3], opponent[2], opponent[3])
+    new_unit = unit[0], unit[1], fight_result[0], fight_result[1]
+    new_opponent = opponent[0], opponent[1], fight_result[2], fight_result[3]
+    if fight_result[2] <= 0 and fight_result[0] > 0:
+        units.remove(opponent)
+        new_new_unit = new_coordinates[0], new_coordinates[1], fight_result[0], fight_result[1]
+        units[id] = new_new_unit
+        return "Win"
+    if fight_result[0] <= 0:
+        if fight_result[2] <= 0:
+            units.remove(opponent)
+        else:
+            units[opponent_id] = new_opponent
+        units.remove(unit)
+        return "Loose"
+    if fight_result[2] > 0 and fight_result[0] > 0:
+        units[id] = new_unit
+        units[opponent_id] = new_opponent
+        return "Draw"

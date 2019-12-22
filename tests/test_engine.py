@@ -37,3 +37,18 @@ def test_calc_new_coordinates(landscape, coordinates, direction, expected):
 )
 def test_find_unit(units, coordinates, expected):
     assert engine.find_unit(units, coordinates) == expected
+
+
+@pytest.mark.parametrize(
+    "landscape,units,coordinates,direction,expected",
+    [
+        ([[1, 1], [1, 1]], [(0, 0, 100, 0), (0, 1, 100, 0)], (0, 0), "E", "Moved"),
+        ([[1, 1], [1, 1]], [(0, 0, 100, 0), (0, 1, 1, 0)], (0, 0), "N", "Win"),
+        ([[1, 1], [1, 1]], [(0, 0, 100, 0), (0, 1, 100, 0)], (0, 0), "N", "Draw"),
+        ([[1, 1], [1, 1]], [(0, 0, 1, 0), (0, 1, 100, 0)], (0, 0), "N", "Loose"),
+        ([[1, 1], [1, 1]], [(0, 0, 100, 0), (0, 1, 100, 0)], (0, 0), "S", None),
+
+    ],
+)
+def test_move_unit(landscape, units, coordinates, direction, expected):
+    assert engine.move_unit(landscape, units, coordinates, direction) == expected
